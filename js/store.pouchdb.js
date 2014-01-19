@@ -8,7 +8,7 @@
   }
 
   function pdocTodoc(doc) {
-    doc.id = doc._id;
+    doc.id = parseInt(doc._id, 10);
     delete doc._rev;
     delete doc._id;
     return doc;
@@ -18,13 +18,13 @@
     this.db.allDocs({include_docs: true}, function(err, docs) {
       var matches = [];
       docs.rows.forEach(function(row) {
-        var doc = row.doc;
+        var doc = pdocTodoc(row.doc);
         for (var q in query) {
           if (query[q] !== doc[q]) {
             return;
           }
         }
-        matches.push(pdocTodoc(doc));
+        matches.push(doc);
       });
       callback(matches);
     });
