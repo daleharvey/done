@@ -103,8 +103,6 @@
     var that = this;
     var viewCommands = {
       showEntries: function () {
-        console.log(that.template.show(parameter));
-        console.log(that.$todoList);
         that.$todoList.innerHTML = that.template.show(parameter);
       },
       removeItem: function () {

@@ -209,8 +209,6 @@
       this.view.render('toggleAll', {checked: todos.completed === todos.total});
       this.view.render('contentBlockVisibility', {visible: todos.total > 0});
     }).bind(this));
-
-    console.log('ok?');
   };
 
   /**
@@ -249,8 +247,6 @@
       this._activeRoute = 'All';
     }
 
-    console.log(currentPage);
-
     this._filter();
 
     this.view.render('setFilter', currentPage);
@@ -259,4 +255,5 @@
   // Export to window
   window.app = window.app || {};
   window.app.Controller = Controller;
+
 })(window);

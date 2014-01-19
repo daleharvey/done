@@ -21,34 +21,32 @@
 
   // This is a very quick and dirty sync setup
 
-  // Host that the couch-persona server is running on
-  var authHost = 'http://persona.pouchdb.com';
-  var remoteCouch;
-  var replication;
+  // Update the UI whenever we see changes, this is gonna cause things
+  // to refresh twice when you make a change, sorry
+  todo.storage.db.changes({
+    since: 'latest',
+    continuous: true,
+    onChange: function(change) {
+      todo.controller.setView(document.location.hash);
+      todo.controller._filter(true);
+    }
+  });
 
-  function sync(details) {
-    if (replication) return;
-    var remote = new PouchDB(details.url, {headers: {'Cookie': details.auth}});
-    var opts = {
-      continuous: true,
-      complete: syncError
-    };
-    todo.storage.db.replicate.to(remote, opts);
-    todo.storage.db.replicate.from(remote, opts);
+  // where is my db servive at
+  var authHost = 'http://127.0.0.1:3000';
+
+  function sync(url) {
+    var opts = {continuous: true};
+    todo.storage.db.replicate.to(url, opts);
+    todo.storage.db.replicate.from(url, opts);
   }
 
-  function syncError() {}
-  function cancelSync() {}
-
   var loggedIn = function(result) {
-    sync({
-      url: result.dbUrl,
-      auth: result.authToken
-    });
+    sync(result.dbUrl);
   };
 
   var loggedOut = function() {
-    cancelSync();
+    // Should probaby do something here
   };
 
   function simpleXhrSentinel(xhr) {
@@ -73,8 +71,6 @@
     var param = 'assert=' + assertion;
     xhr.open('POST', authHost + '/persona/sign-in', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.setRequestHeader("Content-length", param.length);
-    xhr.setRequestHeader("Connection", "close");
     xhr.send(param);
     xhr.onreadystatechange = simpleXhrSentinel(xhr);
   }
