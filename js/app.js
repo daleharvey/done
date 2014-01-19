@@ -71,6 +71,8 @@
     var param = 'assert=' + assertion;
     xhr.open('POST', authHost + '/persona/sign-in', true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("Content-length", param.length);
+    xhr.setRequestHeader("Connection", "close");
     xhr.send(param);
     xhr.onreadystatechange = simpleXhrSentinel(xhr);
   }
