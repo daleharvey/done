@@ -4,8 +4,15 @@
 
 #signin, #signout {
   display: none;
+  float: left;
 }
 
 [data-loggedin=true] #signout, [data-loggedin=false] #signin {
   display: block;
+}
+
+#spinner {
+  opacity: 0.2;
+  margin: 10px;
+  float: right;
 }
