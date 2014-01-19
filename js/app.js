@@ -33,7 +33,7 @@
   });
 
   // where is my db servive at
-  var authHost = 'http://127.0.0.1:3000';
+  var authHost = 'http://persona.pouchdb.com';
 
   function sync(url) {
     var opts = {continuous: true};
