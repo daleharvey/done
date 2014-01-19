@@ -1,0 +1,7 @@
+#signin, #signout {
+  display: none;
+}
+
+[data-loggedin=true] #signout, [data-loggedin=false] #signin {
+  display: block;
+}

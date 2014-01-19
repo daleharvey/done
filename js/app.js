@@ -21,6 +21,12 @@
 
   // This is a very quick and dirty sync setup
 
+  // where is my db servive at
+  var authHost = 'http://persona.pouchdb.com';
+  var syncDom = document.getElementById('sync');
+  var signinLink = document.getElementById('signin');
+  var signoutLink = document.getElementById('signout');
+
   // Update the UI whenever we see changes, this is gonna cause things
   // to refresh twice when you make a change, sorry
   todo.storage.db.changes({
@@ -32,9 +38,6 @@
     }
   });
 
-  // where is my db servive at
-  var authHost = 'http://persona.pouchdb.com';
-
   function sync(url) {
     var opts = {continuous: true};
     todo.storage.db.replicate.to(url, opts);
@@ -42,11 +45,12 @@
   }
 
   var loggedIn = function(result) {
+    syncDom.dataset.loggedin = 'true';
     sync(result.dbUrl);
   };
 
   var loggedOut = function() {
-    // Should probaby do something here
+    syncDom.dataset.loggedin = 'false';
   };
 
   function simpleXhrSentinel(xhr) {
@@ -89,8 +93,6 @@
     onlogout: signoutUser
   });
 
-  var signinLink = document.getElementById('signin');
-  var signoutLink = document.getElementById('signout');
   signinLink.onclick = function() { navigator.id.request(); };
   signoutLink.onclick = function() { navigator.id.logout(); };
 
