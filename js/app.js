@@ -26,6 +26,7 @@
   var syncDom = document.getElementById('sync');
   var signinLink = document.getElementById('signin');
   var signoutLink = document.getElementById('signout');
+  var username = document.getElementById('username');
 
   // Update the UI whenever we see changes, this is gonna cause things
   // to refresh twice when you make a change, sorry
@@ -46,7 +47,8 @@
 
   var loggedIn = function(result) {
     syncDom.dataset.loggedin = 'true';
-    sync(result.dbUrl);
+    username.textContent = result.name
+    sync(result.db);
   };
 
   var loggedOut = function() {

@@ -6,6 +6,7 @@
     <title>done.gd</title>
     <link rel="stylesheet" href="bower_components/todomvc-common/base.css">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/persona.css">
   </head>
   <body>
     <section id="todoapp">
@@ -35,8 +36,10 @@
       </footer>
     </section>
     <footer id="sync">
-      <button id="signin">Sign In</button>
-      <button id="signout">Sign Out</button>
+      <button id="signin" class="persona-button dark"><span>Sign In</span></button>
+      <button id="signout" class="persona-button dark">
+        <span>Sign Out (<small id="username"></small>)</span>
+      </button>
     </footer>
 
     <script src="https://login.persona.org/include.js"></script>

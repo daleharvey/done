@@ -1,3 +1,7 @@
+#sync {
+  padding: 10px;
+}
+
 #signin, #signout {
   display: none;
 }
