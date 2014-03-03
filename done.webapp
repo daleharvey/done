@@ -1,0 +1,10 @@
+{
+  "name": "done.gd",
+  "description": "PouchDB + Persona + CouchDB + TodoMVC = Done.gd",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Dale Harvey",
+    "url": "http://arandomurl.com/"
+  },
+  "default_locale": "en"
+}
