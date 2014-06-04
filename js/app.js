@@ -10,7 +10,8 @@
     this.controller = new app.Controller(this.model, this.view);
   }
 
-  var todo = new Todo('todos');
+  var dbName = 'todo';
+  var todo = new Todo(dbName);
 
   window.addEventListener('load', function () {
     todo.controller.setView(document.location.hash);
@@ -33,7 +34,7 @@
   });
 
 
-  var url = 'http://couchdb.pouchdb.com/sotr';
+  var url = 'http://couchdb.pouchdb.com/' + dbName;
 
   function sync() {
     todo.storage.db.sync(url, {live: true}).on('error', function() {
