@@ -1,62 +1,50 @@
 <!doctype html>
-<html lang="en" data-framework="javascript">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset=utf-8>
     <title>done.gd</title>
-    <link rel="stylesheet" href="bower_components/todomvc-common/base.css">
-    <link rel="stylesheet" href="style/style.css">
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style/done.css">
     <link rel="stylesheet" href="style/persona.css">
   </head>
   <body>
-    <section id="todoapp">
-      <header id="header">
-        <h1>done.gd</h1>
-        <input id="new-todo" placeholder="What needs to be done?" autofocus>
-      </header>
-      <section id="main">
-        <input id="toggle-all" type="checkbox">
-        <label for="toggle-all">Mark all as complete</label>
-        <ul id="todo-list"></ul>
-      </section>
-      <footer id="footer">
-        <span id="todo-count"></span>
-        <ul id="filters">
-          <li>
-            <a href="#/">All</a>
-          </li>
-          <li>
-            <a href="#/active">Active</a>
-          </li>
-          <li>
-            <a href="#/completed">Completed</a>
-          </li>
-        </ul>
-        <button id="clear-completed">Clear completed</button>
-      </footer>
-    </section>
-    <footer id="sync">
-      <button id="signin" class="persona-button dark"><span>Sign In</span></button>
-      <button id="signout" class="persona-button dark">
-        <span>Sign Out (<small id="username"></small>)</span>
-      </button>
-      <div class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
+
+    <section class="page" data-url="/home/">
+      <form id="newList" data-action="newList">
+        <input type="text" id="newListText" autocomplete="off"
+               placeholder="Create new list" />
+        <a href="#/sync/" class="icon" id="sync"></a>
+        <input type="submit">
+      </form>
+      <div id="syncPanel">
+        <p>Enter your email and your lists will sync across devices:</p>
+        <form id="syncSetup">
+          <input type="email" placeholder="you@example.org" />
+          <input type="submit" value="Sync" />
+        </form>
       </div>
-    </footer>
+      <ul id="lists"></ul>
+    </section>
 
-    <script src="https://login.persona.org/include.js"></script>
-    <script src="js/pouchdb-1.1.0.min.js"></script>
-    <script src="js/store.pouchdb.js"></script>
+    <section class="page" data-url="/list/">
+      <div id="items">
+        <header id="listHeader">
+          <h2 id="listName"></h2>
+          <a href="#/home/" class="icon" id="back"></a>
+        </header>
+        <form id="newItem" data-action="newItem">
+          <input type="text" id="newItemText" autocomplete="off"
+                 placeholder="What do you want to do?" />
+          <input type="submit">
+        </form>
+        <ul id="todo-items"></ul>
+        <ul id="done-items"></ul>
+      </div>
+      <div id="cover"></div>
+    </section>
 
-    <script src="bower_components/todomvc-common/base.js"></script>
-    <script src="js/helpers.js"></script>
-    <script src="js/model.js"></script>
-    <script src="js/template.js"></script>
-    <script src="js/view.js"></script>
-    <script src="js/controller.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/pouchdb-3.0.6.min.js"></script>
+    <script src="js/done.js"></script>
+
   </body>
 </html>

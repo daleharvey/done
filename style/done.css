@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+html, body {
+  background: #000;
+  color: #FFF;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+button {
+ outline: 0 !important;
+}
+
+p {
+  padding: 10px;
+  font-weight: normal;
+}
+
+#newList, header {
+  display: flex;
+  flex-flow: row;
+  flex-direction: row;
+}
+
+.icon {
+  flex-shrink: 0;
+  display: block;
+  width: 53px;
+  height: 53px;
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
+}
+
+#back {
+  background-image: url(icon_58226.svg);
+}
+
+#sync {
+  background-image: url(icon_72183.svg);
+}
+
+#syncPanel {
+  background: #333;
+}
+
+#syncPanel form {
+  display: flex;
+  flex-direction: row;
+}
+
+input, textarea, h2 {
+  border: 0;
+  display: block;
+  padding: 15px;
+  flex-grow: 1;
+}
+
+#newList input[type=submit],
+#newItem input[type=submit] {
+  display: none;
+}
+
+textarea {
+  height: 45px;
+  resize: none;
+}
+
+#items {
+  transition: all 0.5s;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  display: block;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  flex-direction: row;
+}
+
+input {
+  background: transparent;
+  color: white;
+}
+
+::-moz-placeholder {
+   color: #CCC;
+}
+
+li a {
+  flex-grow: 2;
+  display: block;
+  padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #FFF;
+}
+
+li a {
+  text-decoration: none;
+}
+
+#items li a {
+  pointer-events: none;
+}
+
+#items li[data-status=done] button {
+  color: black;
+}
+
+li[data-status=done] a {
+  color: #333;
+  background: transparent;
+  text-decoration: line-through;
+}
+
+.editing li {
+  z-index: -1;
+}
+
+#cover {
+  display: block;
+  transition: all 0.5s;
+  background: rgba(0, 0, 0, .7);
+  opacity: 0;
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.editing #cover {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.editing li.editing {
+  z-index: 3;
+}
+
+#items li button {
+  width: 52px;
+  height: 52px;
+  border: 0;
+  background: transparent;
+  color: #000;
+  opacity: 0.2;
+  outline: none;
+  flex-shrink: 0;
+}
+
+#lists li span {
+  display: block;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  text-align: center;
+  line-height: 52px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  transition: all 0.5s;
+}
+
+body[data-url="/home/"] {
+  transform: translate(0);
+}
+
+body[data-url^="/list/"] {
+  transform: translate(0, -100%);
+}
+
+.page {
+  overflow-y: auto;
+  height: 100%;
+  position: relative;
+}
