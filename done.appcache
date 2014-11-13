@@ -1,40 +1,15 @@
 CACHE MANIFEST
 
-# Time: Mon Mar 03 2014 10:02:55 GMT-0500 (EST)
-# This manifest was created by confess.js, http://github.com/jamesgpearce/confess
-#
-# Retrieved URL: http://localhost:8080/
-# User-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.12 Safari/535.11
-#
-# Config:
-#  task: appcache
-#  userAgent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.12 Safari/535.11
-#  wait: 0
-#  consolePrefix: #
-#  verbose: true
-#  appcache:
-#   urlsFromDocument: true
-#   urlsFromRequests: false
-#   cacheFilter: .*
-#   networkFilter: null
-#  url: http://localhost:8080/
-#  configFile: config.json
+# rev v1
 
 CACHE:
-bower_components/todomvc-common/base.css
-bower_components/todomvc-common/base.js
-bower_components/todomvc-common/bg.png
-https://login.persona.org/include.js
-js/app.js
-js/controller.js
-js/helpers.js
-js/model.js
-js/pouchdb-1.1.0.min.js
-js/store.pouchdb.js
-js/template.js
-js/view.js
-style/persona.css
-style/style.css
+http://cdn.jsdelivr.net/pouchdb/latest/pouchdb.min.js
+https://pouch.host/pouch.host.js
+js/done.js
+
+style/done.css
+style/icon_58226.svg
+style/icon_72183.svg
 
 NETWORK:
 *
