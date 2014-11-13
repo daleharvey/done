@@ -70,7 +70,7 @@ var Done = function() {
     this.config = config;
     this.addEvents();
     this.listenToChanges();
-    Janus.session().then(function(session) {
+    PouchHost.session().then(function(session) {
       console.log(session);
       if (session && !session.error) {
         console.log('logged in! sync');
@@ -113,7 +113,7 @@ Done.prototype.syncLogin = function(evt) {
   evt.preventDefault();
 
   var email = document.getElementById('email').value.trim();
-  Janus.login({
+  PouchHost.login({
     email: email
   });
 
