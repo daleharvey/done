@@ -16,6 +16,7 @@ html, body {
 
 body {
   overflow: hidden;
+  display: none;
 }
 
 button {
@@ -27,7 +28,7 @@ p {
   font-weight: normal;
 }
 
-#newList, header {
+#newItem, #newList, header {
   display: flex;
   flex-flow: row;
   flex-direction: row;
@@ -117,10 +118,6 @@ li a {
   text-decoration: none;
 }
 
-#items li a {
-  pointer-events: none;
-}
-
 #items li[data-status=done] button {
   color: black;
 }
@@ -195,4 +192,23 @@ body[data-url^="/list/"] {
   overflow-y: auto;
   height: 100%;
   position: relative;
+}
+
+#syncSubmit {
+  background: #222;
+  border-left: 1px solid #444;
+}
+
+#email {
+  background: #000;
+}
+
+#syncPanel {
+  overflow: hidden;
+  transition: all 0.5s;
+  height: 120px;
+}
+
+#syncPanel.hidden {
+  height: 0;
 }

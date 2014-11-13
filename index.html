@@ -5,24 +5,26 @@
     <title>done.gd</title>
     <meta name=viewport content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="style/done.css">
-    <link rel="stylesheet" href="style/persona.css">
   </head>
   <body>
 
     <section class="page" data-url="/home/">
-      <form id="newList" data-action="newList">
+
+      <form id="newList">
         <input type="text" id="newListText" autocomplete="off"
                placeholder="Create new list" />
-        <a href="#/sync/" class="icon" id="sync"></a>
+        <a class="icon" id="sync"></a>
         <input type="submit">
       </form>
-      <div id="syncPanel">
+
+      <div id="syncPanel" class="hidden">
         <p>Enter your email and your lists will sync across devices:</p>
         <form id="syncSetup">
-          <input type="email" placeholder="you@example.org" />
-          <input type="submit" value="Sync" />
+          <input id="email" type="email" placeholder="you@example.org" />
+          <input type="submit" value="Sync" id="syncSubmit" />
         </form>
       </div>
+
       <ul id="lists"></ul>
     </section>
 
@@ -32,18 +34,19 @@
           <h2 id="listName"></h2>
           <a href="#/home/" class="icon" id="back"></a>
         </header>
-        <form id="newItem" data-action="newItem">
+        <form id="newItem">
           <input type="text" id="newItemText" autocomplete="off"
                  placeholder="What do you want to do?" />
           <input type="submit">
         </form>
-        <ul id="todo-items"></ul>
-        <ul id="done-items"></ul>
+        <ul id="todoItems"></ul>
+        <ul id="doneItems"></ul>
       </div>
       <div id="cover"></div>
     </section>
 
     <script src="js/pouchdb-3.0.6.min.js"></script>
+    <script src="js/janus.client.js"></script>
     <script src="js/done.js"></script>
 
   </body>
