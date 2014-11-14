@@ -187,7 +187,7 @@ Done.prototype.hashChanged = function() {
 
   var url = window.location.hash.slice(1);
   if (!url || url === '') {
-    url = '/list/default';
+    url = '/list/todos';
   }
 
   document.body.dataset.url = url;
@@ -282,9 +282,13 @@ Done.prototype.showList = function(category) {
       startkey: this.currentList,
       endkey: this.currentList + '{}'
     }).then(function(result) {
-      result.rows.forEach(function(doc) {
-        self.processChange(doc.doc);
-      });
+      if (!result.rows.length) {
+        updateBackground(todoItems);
+      } else {
+        result.rows.forEach(function(doc) {
+          self.processChange(doc.doc);
+        });
+      }
       resolve();
     });
 
