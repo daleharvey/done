@@ -28,7 +28,6 @@ function createListItem(doc) {
   return li;
 }
 
-
 function updateBackground(list) {
   var rgb1 = [118,195,45];
   var rgb2 = [195,237,131];
@@ -49,7 +48,6 @@ function updateBackground(list) {
 
   $('newList').style.background = 'rgb(98,179,25)';
   $('newItem').style.background = 'rgb(98,179,25)';
-  $('listHeader').style.background ='rgb(98,179,25)';
 }
 
 var DB_NAME = 'done';
@@ -71,10 +69,11 @@ var Done = function() {
     this.addEvents();
     this.listenToChanges();
     PouchHost.session().then(function(session) {
-      console.log(session);
       if (session && !session.error) {
-        console.log('logged in! sync');
+        $('syncStatus').textContent = 'Logged in!';
         this.db.sync(session.db, {live: true});
+      } else {
+        $('syncStatus').textContent = 'Login to Sync';
       }
       return this.hashChanged();
     }.bind(this)).then(function() {
@@ -85,42 +84,24 @@ var Done = function() {
   }).bind(this));
 };
 
-Done.prototype.getUser = function() {
-  return new Promise(function(resolve) {
-    var http = new XMLHttpRequest();
-    var url = 'http://127.0.0.1:3000/user';
-    http.open('GET', url, true);
-    http.setRequestHeader('Connection', 'close');
-    http.send();
-    resolve();
-  });
-};
-
 Done.prototype.addEvents = function() {
   window.addEventListener('hashchange', this.hashChanged.bind(this));
   $('newList').addEventListener('submit', this.createNewList.bind(this));
   $('newItem').addEventListener('submit', this.createNewItem.bind(this));
   $('syncSetup').addEventListener('submit', this.syncLogin.bind(this));
-  $('sync').addEventListener('click', this.toggleSyncPanel.bind(this));
   $('items').addEventListener('click', this.toggleDone.bind(this));
-};
-
-Done.prototype.toggleSyncPanel = function() {
-  $('syncPanel').classList.toggle('hidden');
 };
 
 Done.prototype.syncLogin = function(evt) {
   evt.preventDefault();
 
-  var email = document.getElementById('email').value.trim();
   PouchHost.login({
-    email: email
+    email: document.getElementById('email').value.trim()
   });
 
   var notification = 'You have been sent an email with a token to login. ' +
     'Click on the link in the email and your data will sync with done.gd';
   alert(notification);
-  this.toggleSyncPanel();
 };
 
 Done.prototype.createNewList = function(evt) {
@@ -267,8 +248,6 @@ Done.prototype.showList = function(category) {
 
     this.currentIndex = 0;
     this.currentList = category;
-
-    listName.textContent = this.currentList;
 
     var map = function(doc) {
       if (doc.category) {

@@ -8,42 +8,50 @@
   </head>
   <body>
 
-    <section class="page" data-url="/home/">
+    <div id="content">
 
-      <form id="newList">
-        <input type="text" id="newListText" autocomplete="off"
-               placeholder="Create new list" />
-        <a class="icon" id="sync"></a>
-        <input type="submit">
-      </form>
+      <div id="pages">
 
-      <div id="syncPanel" class="hidden">
-        <p>Enter your email and your lists will sync across devices:</p>
-        <form id="syncSetup">
-          <input id="email" type="email" placeholder="you@example.org" />
-          <input type="submit" value="Sync" id="syncSubmit" />
-        </form>
+        <section class="page" data-url="/home/">
+          <form id="newList">
+            <input type="text" id="newListText" autocomplete="off"
+                   placeholder="Create new list" />
+            <input type="submit">
+          </form>
+          <ul id="lists"></ul>
+        </section>
+
+        <section class="page" data-url="/list/">
+          <div id="items">
+            <form id="newItem">
+              <input type="text" id="newItemText" autocomplete="off"
+                     placeholder="What do you want to do?" />
+              <input type="submit">
+            </form>
+            <ul id="todoItems"></ul>
+            <ul id="doneItems"></ul>
+          </div>
+          <div id="cover"></div>
+        </section>
+
+        <section class="page" data-url="/sync/">
+          <p>Enter your email and your lists will sync across devices:</p>
+          <form id="syncSetup">
+            <input id="email" type="email" placeholder="you@example.org" />
+            <input type="submit" value="Sync" id="syncSubmit" />
+          </form>
+        </section>
+
       </div>
 
-      <ul id="lists"></ul>
-    </section>
+      <footer>
+        <a href="#/home/" class="icon" id="back"></a>
+        <a href="#/sync/" id="syncDesc">
+          <p id="syncStatus"></p>
+        </a>
+      </footer>
 
-    <section class="page" data-url="/list/">
-      <div id="items">
-        <header id="listHeader">
-          <h2 id="listName"></h2>
-          <a href="#/home/" class="icon" id="back"></a>
-        </header>
-        <form id="newItem">
-          <input type="text" id="newItemText" autocomplete="off"
-                 placeholder="What do you want to do?" />
-          <input type="submit">
-        </form>
-        <ul id="todoItems"></ul>
-        <ul id="doneItems"></ul>
-      </div>
-      <div id="cover"></div>
-    </section>
+    </div>
 
     <script src="http://cdn.jsdelivr.net/pouchdb/latest/pouchdb.min.js"></script>
     <script src="https://pouch.host/pouch.host.js"></script>

@@ -14,9 +14,37 @@ html, body {
   height: 100%;
 }
 
-body {
+#content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#pages {
+  flex-grow: 1;
   overflow: hidden;
-  display: none;
+}
+
+footer {
+  height: 45px;
+  background: #D78748;
+  display: flex;
+  flex-direction: row;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer #back {
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+footer #syncDesc {
+  flex-grow: 1;
+  text-align: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 button {
@@ -37,16 +65,16 @@ p {
 .icon {
   flex-shrink: 0;
   display: block;
-  width: 53px;
-  height: 53px;
+  width: 45px;
+  height: 45px;
   background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 #back {
-  background-image: url(icon_58226.svg);
+  background-image: url(icon_11515.svg);
 }
 
 #sync {
@@ -180,15 +208,18 @@ body {
   transition: all 0.5s;
 }
 
-body[data-url="/home/"] {
-  transform: translate(0);
+body[data-url="/home/"] .page[data-url="/home/"] {
+  display: block;
 }
-
-body[data-url^="/list/"] {
-  transform: translate(0, -100%);
+body[data-url="/sync/"] .page[data-url="/sync/"] {
+  display: block;
+}
+body[data-url^="/list/"] .page[data-url="/list/"] {
+  display: block;
 }
 
 .page {
+  display: none;
   overflow-y: auto;
   height: 100%;
   position: relative;
