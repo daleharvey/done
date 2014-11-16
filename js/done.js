@@ -85,10 +85,10 @@ Done.prototype.updateSession = function() {
   return PouchHost.session().then(function(session) {
     this.session = session;
     if (session && !session.error) {
-      $('syncStatus').textContent = session.user;
+      $('syncDesc').textContent = session.user;
       this.doSync(session.db);
     } else {
-      $('syncStatus').textContent = 'Login to Sync';
+      $('syncDesc').textContent = 'Login to Sync';
     }
   }.bind(this));
 };
@@ -209,7 +209,6 @@ Done.prototype.updateSyncPage = function() {
     return;
   }
   $('loggedin').style.display = 'block';
-  $('userName').textContent = this.session.user;
 
   if (this.sync.status === 'error') {
     $('syncLargeStatus').innerHTML = 'Unknown Error syncing ' +

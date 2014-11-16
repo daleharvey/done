@@ -17,6 +17,10 @@ html, body {
   height: 100%;
 }
 
+p {
+  margin: 10px 0;
+}
+
 #content {
   display: flex;
   display: -webkit-flex;
@@ -62,17 +66,21 @@ footer #syncDesc {
   border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+#syncSubmit {
+  margin-top: 10px;
+}
+
 #syncIcon[data-status='error'] {
   background-image: url(icon_4627.svg);
 }
 
 #syncIcon[data-status='synced'] {
-  background-image: url(icon_2888.svg);
+  background-image: url(icon_5264.svg);
 }
 
 #syncIcon[data-status='syncing'] {
   animation: 1.5s spinner-animation infinite steps(30);
-  background-image: url(icon_2888.svg);
+  background-image: url(icon_5264.svg);
 }
 
 @keyframes spinner-animation {
@@ -178,15 +186,16 @@ input {
   color: white;
 }
 
-[data-url='/sync/'] input {
+[data-url='/sync/'] input,
+[data-url='/sync/'] button {
   padding: 8px;
   border: 0;
   display: block;
   width: 100%;
-  margin-top: 10px;
   font-weight: normal;
   font-size: 16px;
 }
+
 
 ::-moz-placeholder {
    color: #CCC;
@@ -286,7 +295,7 @@ body[data-url^="/list/"] .page[data-url="/list/"] {
   position: relative;
 }
 
-#syncSubmit {
+[data-url='/sync/'] button {
   background: rgb(98,179,25);
   color: white;
   font-weight: bold;
