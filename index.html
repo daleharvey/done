@@ -1,5 +1,5 @@
 <!doctype html>
-<html manifest="/done.appcache">
+<html>
   <head>
     <meta charset=utf-8>
     <title>done.gd</title>
@@ -35,11 +35,18 @@
         </section>
 
         <section class="page" data-url="/sync/">
-          <p>Enter your email and your lists will sync across devices:</p>
-          <form id="syncSetup">
-            <input id="email" type="email" placeholder="you@example.org" />
-            <input type="submit" value="Sync" id="syncSubmit" />
-          </form>
+          <div id="login">
+            <p>Enter your email and your lists will sync across devices:</p>
+            <form id="syncSetup">
+              <input id="email" type="email" placeholder="you@example.org" />
+              <input type="submit" value="Sync" id="syncSubmit" />
+            </form>
+          </div>
+          <div id="loggedin">
+            Logged in as: <em id="userName"></em>
+            <br /><br />
+            <p id="syncLargeStatus"></p>
+          </div>
         </section>
 
       </div>
@@ -49,6 +56,7 @@
         <a href="#/sync/" id="syncDesc">
           <p id="syncStatus"></p>
         </a>
+        <a href="#/sync/" class="icon" id="syncIcon"></a>
       </footer>
 
     </div>

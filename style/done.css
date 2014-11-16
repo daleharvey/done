@@ -2,6 +2,9 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+body, input {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
   font-weight: bold;
@@ -18,18 +21,22 @@ html, body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-height: 100%;
 }
 
 #pages {
   flex-grow: 1;
+  flex-shrink: 50;
   overflow: hidden;
 }
 
 footer {
   height: 45px;
+  line-height: 45px;
   background: #D78748;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 
 footer a {
@@ -47,13 +54,38 @@ footer #syncDesc {
   border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-button {
- outline: 0 !important;
+#syncIcon[data-status='error'] {
+  background-image: url(icon_4627.svg);
 }
 
-p {
-  padding: 10px;
-  font-weight: normal;
+#syncIcon[data-status='synced'] {
+  background-image: url(icon_2888.svg);
+}
+
+#syncIcon[data-status='syncing'] {
+  animation: 1.5s spinner-animation infinite steps(30);
+  background-image: url(icon_2888.svg);
+}
+
+@keyframes spinner-animation {
+  from {
+    transform: rotate(1deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.page[data-url='/sync/'] {
+  background: white;
+  color: #333;
+  text-shadow: none;
+  padding: 15px;
+}
+
+li button {
+  font-size: 18px;
+  outline: 0 !important;
 }
 
 #newItem, #newList, header {
@@ -234,12 +266,6 @@ body[data-url^="/list/"] .page[data-url="/list/"] {
   background: #000;
 }
 
-#syncPanel {
-  overflow: hidden;
-  transition: all 0.5s;
-  height: 120px;
-}
-
-#syncPanel.hidden {
-  height: 0;
+[data-url='/sync/'] > div {
+  display: none;
 }

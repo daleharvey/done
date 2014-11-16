@@ -15,6 +15,7 @@ function createListItem(doc) {
   var li = document.createElement('li');
   var a = document.createElement('a');
   var btn = document.createElement('button');
+  li.dataset.id = doc._id;
   li.dataset.updated = doc.updated;
   li.dataset.status = doc.status;
   li.dataset.index = doc.index;
@@ -55,6 +56,8 @@ var DB_NAME = 'done';
 var Done = function() {
 
   this.db = new PouchDB(DB_NAME);
+  this.session;
+  this.sync;
 
   this.currentList = null;
   // Items in a list have their own index (so they can be reordered)
@@ -68,20 +71,55 @@ var Done = function() {
     this.config = config;
     this.addEvents();
     this.listenToChanges();
-    PouchHost.session().then(function(session) {
-      if (session && !session.error) {
-        $('syncStatus').textContent = 'Logged in!';
-        this.db.sync(session.db, {live: true});
-      } else {
-        $('syncStatus').textContent = 'Login to Sync';
-      }
-      return this.hashChanged();
-    }.bind(this)).then(function() {
-      // Lets not show the user the animations and
-      // item reordering on startup
-      document.body.style.display = 'block';
-    });
+    this.updateSession()
+      .then(this.hashChanged.bind(this))
+      .then(function() {
+        // Lets not show the user the animations and
+        // item reordering on startup
+        document.body.style.display = 'block';
+      });
   }).bind(this));
+};
+
+Done.prototype.updateSession = function() {
+  return PouchHost.session().then(function(session) {
+    this.session = session;
+    if (session && !session.error) {
+      $('syncStatus').textContent = session.user;
+      this.doSync(session.db);
+    } else {
+      $('syncStatus').textContent = 'Login to Sync';
+    }
+  }.bind(this));
+};
+
+Done.prototype.doSync = function(db) {
+
+  var updateSyncStatus = function(status) {
+    sync.status = status;
+    $('syncIcon').dataset.status = sync.status;
+    this.updateSyncPage();
+  }.bind(this);
+
+  var upToDates = 0;
+  var sync = this.sync = this.db.sync(db, {live: true});
+  updateSyncStatus('syncing');
+
+  sync.on('change', function() {
+    updateSyncStatus('syncing');
+  });
+
+  sync.on('uptodate', function() {
+    // (we get 2 uptodates, for pull and push)
+    if (++upToDates === 2) {
+      upToDates = 0;
+      updateSyncStatus('synced');
+    }
+  });
+
+  sync.on('error', function() {
+    updateSyncStatus('error');
+  });
 };
 
 Done.prototype.addEvents = function() {
@@ -94,11 +132,9 @@ Done.prototype.addEvents = function() {
 
 Done.prototype.syncLogin = function(evt) {
   evt.preventDefault();
-
   PouchHost.login({
     email: document.getElementById('email').value.trim()
   });
-
   var notification = 'You have been sent an email with a token to login. ' +
     'Click on the link in the email and your data will sync with done.gd';
   alert(notification);
@@ -164,6 +200,24 @@ Done.prototype.listenToChanges = function() {
   }).bind(this));
 };
 
+Done.prototype.updateSyncPage = function() {
+  if (!this.session) {
+    $('login').style.display = 'block';
+    $('loggedin').style.display = 'none';
+    return;
+  }
+  $('loggedin').style.display = 'block';
+  $('userName').textContent = this.session.user;
+
+  if (this.sync.status === 'error') {
+    $('syncLargeStatus').innerHTML = 'Unknown Error syncing ' +
+      '<button>Click to retry</button>';
+  } else {
+    $('syncLargeStatus').textContent = 'Currently Syncing';
+  }
+
+};
+
 Done.prototype.hashChanged = function() {
 
   var url = window.location.hash.slice(1);
@@ -182,6 +236,8 @@ Done.prototype.hashChanged = function() {
       this.editItem(parts[4]);
     }
     return promise;
+  } else if (url === '/sync/') {
+    this.updateSyncPage();
   }
 }
 
