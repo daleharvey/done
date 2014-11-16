@@ -133,11 +133,13 @@ Done.prototype.addEvents = function() {
 Done.prototype.syncLogin = function(evt) {
   evt.preventDefault();
   PouchHost.login({
-    email: document.getElementById('email').value.trim()
+    email: $('email').value.trim()
   });
   var notification = 'You have been sent an email with a token to login. ' +
     'Click on the link in the email and your data will sync with done.gd';
   alert(notification);
+  $('email').value = '';
+  document.location.hash = '#';
 };
 
 Done.prototype.createNewList = function(evt) {

@@ -85,15 +85,21 @@ footer #syncDesc {
 }
 
 .page[data-url='/sync/'] {
-  background: white;
+  background: #EEE;
   color: #333;
   text-shadow: none;
   padding: 15px;
 }
 
+.page[data-url='/sync/'] input {
+  color: #333;
+  background: #FFF;
+  text-shadow: none;
+}
+
 li button {
-  font-size: 18px;
-  outline: 0 !important;
+   font-size: 18px;
+   outline: 0 !important;
 }
 
 #newItem, #newList, header {
@@ -132,7 +138,7 @@ li button {
   flex-direction: row;
 }
 
-input, textarea, h2 {
+li input, li textarea, .item {
   border: 0;
   display: block;
   padding: 15px;
@@ -170,6 +176,16 @@ li {
 input {
   background: transparent;
   color: white;
+}
+
+[data-url='/sync/'] input {
+  padding: 8px;
+  border: 0;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  font-weight: normal;
+  font-size: 16px;
 }
 
 ::-moz-placeholder {
@@ -271,12 +287,11 @@ body[data-url^="/list/"] .page[data-url="/list/"] {
 }
 
 #syncSubmit {
-  background: #222;
-  border-left: 1px solid #444;
-}
-
-#email {
-  background: #000;
+  background: rgb(98,179,25);
+  color: white;
+  font-weight: bold;
+  border: 0;
+  border-radius: 5px;
 }
 
 [data-url='/sync/'] > div {
