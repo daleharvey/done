@@ -201,7 +201,7 @@ Done.prototype.listenToChanges = function() {
 };
 
 Done.prototype.updateSyncPage = function() {
-  if (!this.session) {
+  if (!this.session || !this.session.user) {
     $('login').style.display = 'block';
     $('loggedin').style.display = 'none';
     return;
