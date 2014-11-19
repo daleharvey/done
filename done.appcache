@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# rev v3
+# rev v4
 
 CACHE:
 http://cdn.jsdelivr.net/pouchdb/latest/pouchdb.min.js
@@ -10,6 +10,9 @@ js/done.js
 style/done.css
 style/icon_58226.svg
 style/icon_72183.svg
+style/icon_4627.svg
+style/icon_5264.svg
+style/icon_11515.svg
 
 NETWORK:
 *
