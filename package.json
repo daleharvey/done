@@ -1,0 +1,26 @@
+{
+  "name": "done",
+  "version": "0.0.0",
+  "description": "Todo List",
+  "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^4.0.0",
+    "http-server": "^0.7.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "http-server",
+    "build": "npm run build-css",
+    "build-css": "autoprefixer style/done.css -o style/done-compiled.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daleharvey/done.git"
+  },
+  "author": "Dale Harvey",
+  "license": "Apache v2",
+  "bugs": {
+    "url": "https://github.com/daleharvey/done/issues"
+  },
+  "homepage": "https://github.com/daleharvey/done"
+}
