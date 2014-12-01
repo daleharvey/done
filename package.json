@@ -10,8 +10,9 @@
   "devDependencies": {},
   "scripts": {
     "dev": "http-server",
-    "build": "npm run build-css",
-    "build-css": "autoprefixer style/done.css -o style/done-compiled.css"
+    "build": "npm run build-css && npm run build-manifest",
+    "build-css": "autoprefixer style/done.css -o style/done-compiled.css",
+    "build-manifest": "appcachegen -o manifest.appcache"
   },
   "repository": {
     "type": "git",
