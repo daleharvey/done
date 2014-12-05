@@ -5,11 +5,12 @@
   "main": "index.js",
   "dependencies": {
     "autoprefixer": "^4.0.0",
-    "http-server": "^0.7.3"
+    "http-server": "^0.7.3",
+    "watch": "^0.13.0"
   },
   "devDependencies": {},
   "scripts": {
-    "dev": "http-server -c-1",
+    "dev": "http-server -c-1 & node watch.js",
     "build": "npm run build-css && npm run build-manifest",
     "build-css": "autoprefixer style/done.css -o style/done-compiled.css",
     "build-manifest": "appcachegen -o manifest.appcache -r manifest.tpl"
