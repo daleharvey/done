@@ -9,3 +9,5 @@ done.appcache
 done.webapp
 
 /style/done.css
+
+watch.js

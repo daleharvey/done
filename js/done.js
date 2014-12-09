@@ -172,6 +172,7 @@ Done.prototype.editItem = function(id) {
   db.get(id).then(function(doc) {
     var pos = li.getBoundingClientRect();
     items.style.transform = 'translate(0, -' + pos.top + 'px)';
+    items.style.webkitTransform = 'translate(0, -' + pos.top + 'px)';
     document.body.classList.add('editing');
     li.innerHTML = '';
     var input = document.createElement('input');
@@ -181,6 +182,7 @@ Done.prototype.editItem = function(id) {
     input.addEventListener('blur', function() {
       window.location.hash = '#/list/' + doc.category;
       items.style.transform = '';
+      items.style.webkitTransform = '';
       document.body.classList.remove('editing');
       doc.title = input.value;
       doc.updated = Date.now();
