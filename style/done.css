@@ -155,7 +155,7 @@ textarea {
 }
 
 #items {
-  transition: all 0.5s;
+  transition: all 0.1s;
 }
 
 ul {
@@ -220,7 +220,6 @@ li[data-status=done] a {
 
 #cover {
   display: block;
-  transition: all 0.5s;
   background: rgba(0, 0, 0, .7);
   opacity: 0;
   position: absolute;
@@ -263,7 +262,7 @@ li[data-status=done] a {
 }
 
 body {
-  transition: all 0.5s;
+  transition: all 0.1s;
 }
 
 body[data-url="/home/"] .page[data-url="/home/"] {
