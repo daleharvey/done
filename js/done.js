@@ -82,6 +82,9 @@ var Done = function() {
 };
 
 Done.prototype.updateSession = function() {
+  if (typeof PouchHost === 'undefined') {
+    return new Promise(function(resolve) { resolve(); });
+  }
   return PouchHost.session().then(function(session) {
     this.session = session;
     if (session && !session.error) {

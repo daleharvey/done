@@ -4,14 +4,23 @@
     <meta charset=utf-8>
     <title>done.gd</title>
 
-    <link rel="icon" href="style/icon_41539.svg" type="image/svg+xml">
-    <link rel="icon" href="style/icon_41539.png" type="image/png">
-    <link rel="apple-touch-icon"  href="style/icon_41539.png" sizes="1200×1200">
-
-    <meta name=viewport content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="style/done-compiled.css">
 
+    <link rel="icon" href="style/icon_41539.svg" type="image/svg+xml">
+
+    <!-- Only Firefox supports svg icons -->
+    <link rel="icon" href="style/icon_41539.png" type="image/png">
+
+    <!-- Apple Crap -->
+    <link rel="apple-touch-icon" href="style/icon_41539.png" sizes="1200×1200">
+    <link rel="apple-touch-icon" href="style/icon_41539-120.png" sizes="120×120">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Android ... -->
+    <meta name="mobile-web-app-capable" content="yes">
+
   </head>
   <body>
 
@@ -65,7 +74,7 @@
 
     </div>
 
-    <script src="http://cdn.jsdelivr.net/pouchdb/latest/pouchdb.min.js"></script>
+    <script src="js/pouchdb.min.js"></script>
     <script src="https://pouch.host/pouch.host.js"></script>
     <script src="js/lie.js"></script>
     <script src="js/done.js"></script>
