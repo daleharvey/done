@@ -57,7 +57,7 @@ var Done = function() {
 
   this.db = new PouchDB(DB_NAME);
   this.session;
-  this.sync;
+  this.sync = false;
 
   this.currentList = null;
   // Items in a list have their own index (so they can be reordered)
@@ -81,8 +81,13 @@ var Done = function() {
   }).bind(this));
 };
 
+Done.prototype.loggedOut = function() {
+  $('syncDesc').textContent = 'Login to Sync';
+};
+
 Done.prototype.updateSession = function() {
   if (typeof PouchHost === 'undefined') {
+    this.loggedOut();
     return new Promise(function(resolve) { resolve(); });
   }
   return PouchHost.session().then(function(session) {
@@ -91,7 +96,7 @@ Done.prototype.updateSession = function() {
       $('syncDesc').textContent = session.user;
       this.doSync(session.db);
     } else {
-      $('syncDesc').textContent = 'Login to Sync';
+      return this.loggedOut();
     }
   }.bind(this));
 };
@@ -99,20 +104,25 @@ Done.prototype.updateSession = function() {
 Done.prototype.doSync = function(db) {
 
   var updateSyncStatus = function(status) {
-    sync.status = status;
-    $('syncIcon').dataset.status = sync.status;
+    this.sync.status = status;
+    $('syncIcon').dataset.status = this.sync.status;
     this.updateSyncPage();
   }.bind(this);
 
   var upToDates = 0;
-  var sync = this.sync = this.db.sync(db, {live: true});
+
+  this.sync = {
+    db: db,
+    obj: this.db.sync(db, {live: true})
+  };
+
   updateSyncStatus('syncing');
 
-  sync.on('change', function() {
+  this.sync.obj.on('change', function() {
     updateSyncStatus('syncing');
   });
 
-  sync.on('uptodate', function() {
+  this.sync.obj.on('uptodate', function() {
     // (we get 2 uptodates, for pull and push)
     if (++upToDates === 2) {
       upToDates = 0;
@@ -120,7 +130,8 @@ Done.prototype.doSync = function(db) {
     }
   });
 
-  sync.on('error', function() {
+  this.sync.obj.on('error', function(e) {
+    console.error(e);
     updateSyncStatus('error');
   });
 };
@@ -213,15 +224,12 @@ Done.prototype.updateSyncPage = function() {
     $('loggedin').style.display = 'none';
     return;
   }
+
   $('loggedin').style.display = 'block';
-
-  if (this.sync.status === 'error') {
-    $('syncLargeStatus').innerHTML = 'Unknown Error syncing ' +
-      '<button>Click to retry</button>';
-  } else {
-    $('syncLargeStatus').textContent = 'Currently Syncing';
-  }
-
+  $('syncStatus').dataset.status = this.sync.status;
+  $('statusDesc').innerHTML = (this.sync.status === 'error')
+    ? '<button class="warning" onclick="location.reload()">' +
+      'Error Syncing, try again?</button>' : '✓ Your data is in sync';
 };
 
 Done.prototype.hashChanged = function() {

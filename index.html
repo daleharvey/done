@@ -51,16 +51,19 @@
         </section>
 
         <section class="page" data-url="/sync/">
+
           <div id="login">
             <p>Enter your email and your lists will sync across devices:</p>
             <form id="syncSetup">
               <input id="email" type="email" placeholder="you@example.org" />
-              <button type="submit" id="syncSubmit">Sync</button>
+              <button type="submit" id="syncSubmit">Login</button>
             </form>
           </div>
           <div id="loggedin">
-            <button>Logout</button>
-            <p id="syncLargeStatus"></p>
+            <div id="syncStatus">
+              <p id="statusDesc"></p>
+              <button class="warn">Logout</button>
+            </div>
           </div>
         </section>
 
