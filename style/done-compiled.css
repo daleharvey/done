@@ -416,3 +416,5 @@ body[data-url^="/list/"] .page[data-url="/list/"] {
 button.warning {
   background: #ff5722;
 }
+
+#logout { display: none; }

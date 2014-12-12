@@ -142,6 +142,7 @@ Done.prototype.addEvents = function() {
   $('newItem').addEventListener('submit', this.createNewItem.bind(this));
   $('syncSetup').addEventListener('submit', this.syncLogin.bind(this));
   $('items').addEventListener('click', this.toggleDone.bind(this));
+  $('logout').addEventListener('click', this.logout.bind(this));
 };
 
 Done.prototype.syncLogin = function(evt) {
@@ -154,6 +155,13 @@ Done.prototype.syncLogin = function(evt) {
   alert(notification);
   $('email').value = '';
   document.location.hash = '#';
+};
+
+Done.prototype.logout = function(evt) {
+  evt.preventDefault();
+  PouchHost.logout().then(function() {
+    location.reload();
+  });
 };
 
 Done.prototype.createNewList = function(evt) {
