@@ -71,13 +71,12 @@ var Done = function() {
     this.config = config;
     this.addEvents();
     this.listenToChanges();
-    this.updateSession()
-      .then(this.hashChanged.bind(this))
-      .then(function() {
-        // Lets not show the user the animations and
-        // item reordering on startup
-        document.body.style.display = 'block';
-      });
+    this.updateSession();
+    this.hashChanged().then(function() {
+      // Lets not show the user the animations and
+      // item reordering on startup
+      document.body.style.display = 'block';
+    });
   }).bind(this));
 };
 

@@ -1,10 +1,11 @@
 CACHE MANIFEST
-# Wed Dec 17 2014 19:31:38 GMT+0100 (CET)
+# Sat Jan 17 2015 19:56:08 GMT+0000 (GMT)
 
 /index.html
 /
 /js/done.js
 /js/lie.js
+/js/pouch.host.js
 /js/pouchdb-3.2.0.min.js
 /style/done-compiled.css
 /style/icon_11515.svg
@@ -14,8 +15,6 @@ CACHE MANIFEST
 /style/icon_41539.svg
 /style/icon_4627.svg
 /style/icon_5264.svg
-
-https://pouch.host/pouch.host.js
 
 NETWORK:
 *
