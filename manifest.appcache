@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Sat Jan 17 2015 19:56:08 GMT+0000 (GMT)
+# Sat Jan 17 2015 20:59:29 GMT+0000 (GMT)
 
 /index.html
 /
@@ -7,6 +7,7 @@ CACHE MANIFEST
 /js/lie.js
 /js/pouch.host.js
 /js/pouchdb-3.2.0.min.js
+/js/pouchdb-3.3.0-nightly.min.js
 /style/done-compiled.css
 /style/icon_11515.svg
 /style/icon_2888.svg

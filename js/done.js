@@ -112,21 +112,17 @@ Done.prototype.doSync = function(db) {
 
   this.sync = {
     db: db,
-    obj: this.db.sync(db, {live: true})
+    obj: this.db.sync(db, {live: true, retry: true})
   };
 
   updateSyncStatus('syncing');
 
-  this.sync.obj.on('change', function() {
+  this.sync.obj.on('active', function() {
     updateSyncStatus('syncing');
   });
 
-  this.sync.obj.on('uptodate', function() {
-    // (we get 2 uptodates, for pull and push)
-    if (++upToDates === 2) {
-      upToDates = 0;
-      updateSyncStatus('synced');
-    }
+  this.sync.obj.on('paused', function() {
+    updateSyncStatus('synced');
   });
 
   this.sync.obj.on('error', function(e) {
